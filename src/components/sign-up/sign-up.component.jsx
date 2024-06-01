@@ -30,6 +30,10 @@ const changeHandler=(event)=>{
  setFormFields({...formFields,[name]:value})
 
 }
+
+const clearforFields=()=>{
+    setFormFields(defaultFormFields)
+  }
 const handleSubmit= async (event)=>{
 
   event.preventDefault()
@@ -42,6 +46,7 @@ const handleSubmit= async (event)=>{
   try {
       const {user}=await createAuthUserWithEmailAndPassword(email,password)
       await createUserDocumentFromAuth(user,{displayName})
+      clearforFields()
     
   } catch (error) {
     console.log('User creation encountered an error',error.message);
@@ -61,7 +66,7 @@ const handleSubmit= async (event)=>{
 
     <InputForm label={'Confirm Password'} required type="password" name="confirmPassword" value={confirmPassword} onChange={changeHandler}/>
     
-    <Button typesubmit>SIGN UP</Button>
+    <Button type="submit">SIGN UP</Button>
     </form>
     </div>
   )
