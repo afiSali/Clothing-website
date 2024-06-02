@@ -12,7 +12,6 @@ const defaultFormFields={
 
 
 const SignInForm = () => {
-
 const [formFields,setFormFields]=useState(defaultFormFields)
 
 const {
@@ -37,9 +36,8 @@ const handleSubmit= async (event)=>{
  
   
   try {
-    const response=await SignInAuthUserWithEmailAndPassword(email,password)
-    
-      clearforFields()
+    const {user}=await SignInAuthUserWithEmailAndPassword(email,password)
+    clearforFields()
     
   } catch (error) {
     console.log(error);
@@ -47,8 +45,7 @@ const handleSubmit= async (event)=>{
 }
 
 const signInWithGoogle= async ()=>{
-  const {user}= await signInWithGooglePopup()
-  const userDocRef=await createUserDocumentFromAuth(user)
+  await signInWithGooglePopup()
 }
 
 
